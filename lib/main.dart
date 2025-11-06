@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/transaction_provider.dart';
+import 'providers/budget_provider.dart';
+import 'providers/theme_provider.dart';
+import 'providers/goal_provider.dart';
+import 'services/storage_service.dart';
 import 'screens/dashboard_screen.dart';
-import 'screens/transactions_screen.dart';
-import 'screens/add_transaction_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageService.init();
   runApp(const MyApp());
 }
 
@@ -12,15 +18,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'PiggyB',
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (ctx) => const DashboardScreen(),
-        '/transactions': (ctx) => const TransactionsScreen(),
-        '/add_transaction': (ctx) => const AddTransactionScreen(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => TransactionProvider()),
+        ChangeNotifierProvider(create: (_) => GoalProvider()),
+        ChangeNotifierProxyProvider<TransactionProvider, BudgetProvider>(
+          create: (context) => BudgetProvider(
+            transactionProvider: context.read<TransactionProvider>(),
+          ),
+          update: (context, transactionProvider, previous) =>
+              previous ??
+              BudgetProvider(transactionProvider: transactionProvider),
+        ),
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'Expense Tracker',
+            debugShowCheckedModeBanner: false,
+            theme: themeProvider.lightTheme,
+            darkTheme: themeProvider.darkTheme,
+            themeMode: themeProvider.isDarkMode
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            home: const DashboardScreen(),
+          );
+        },
+      ),
     );
   }
 }
