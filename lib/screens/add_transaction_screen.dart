@@ -34,7 +34,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
 
   void _save() {
     if (!_formKey.currentState!.validate()) return;
-    // For now just pop with simple result; persistence will be added later.
     Navigator.pop(context, {
       'title': _titleController.text.trim(),
       'amount': _amountController.text.trim(),

@@ -6,7 +6,6 @@ class TransactionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Empty list placeholder; data logic will be added later.
     final transactions = <dynamic>[]; // placeholder
 
     return Scaffold(

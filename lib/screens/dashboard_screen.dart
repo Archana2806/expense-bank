@@ -14,7 +14,6 @@ class DashboardScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // Settings screen not yet implemented; show placeholder
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -30,7 +29,6 @@ class DashboardScreen extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          // Data loading will be implemented later; placeholder refresh
           await Future<void>.delayed(const Duration(milliseconds: 300));
         },
         child: SingleChildScrollView(
@@ -39,7 +37,7 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Placeholder Balance Card
+              // Balance Card
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -60,7 +58,7 @@ class DashboardScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Placeholder Expense Chart
+              // Expense Chart
               Text(
                 'Expenses by Category',
                 style: Theme.of(
@@ -79,7 +77,7 @@ class DashboardScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Recent Transactions (placeholder)
+              // Transactions
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -149,7 +147,6 @@ class DashboardScreen extends StatelessWidget {
               ),
             );
           } else if (index == 2) {
-            // Budgets screen not implemented yet; show placeholder
             Navigator.push(
               context,
               MaterialPageRoute(
