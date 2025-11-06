@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/transaction_provider.dart';
+import '../providers/budget_provider.dart';
+import '../widgets/balance_card.dart';
+import '../widgets/recent_transactions_list.dart';
+import '../widgets/expense_chart.dart';
 import 'add_transaction_screen.dart';
 import 'transactions_screen.dart';
+import 'budgets_screen.dart';
+import 'settings_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -16,12 +24,7 @@ class DashboardScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => Scaffold(
-                    appBar: AppBar(title: const Text('Settings')),
-                    body: const Center(child: Text('Settings coming soon')),
-                  ),
-                ),
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
               );
             },
           ),
@@ -29,7 +32,8 @@ class DashboardScreen extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          await Future<void>.delayed(const Duration(milliseconds: 300));
+          context.read<TransactionProvider>().loadTransactions();
+          context.read<BudgetProvider>().loadBudgets();
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -38,24 +42,7 @@ class DashboardScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Balance Card
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Balance', style: TextStyle(fontSize: 18)),
-                      Text(
-                        '\$0.00',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              const BalanceCard(),
               const SizedBox(height: 24),
 
               // Expense Chart
@@ -66,18 +53,10 @@ class DashboardScreen extends StatelessWidget {
                 ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
-              Container(
-                height: 160,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Center(child: Text('Chart placeholder')),
-              ),
+              const ExpenseChart(),
               const SizedBox(height: 24),
 
-              // Transactions
+              // Recent Transactions
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -89,22 +68,19 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/transactions');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TransactionsScreen(),
+                        ),
+                      );
                     },
                     child: const Text('See All'),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
-              Container(
-                height: 120,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Center(child: Text('No recent transactions')),
-              ),
+              const RecentTransactionsList(),
             ],
           ),
         ),
@@ -149,12 +125,7 @@ class DashboardScreen extends StatelessWidget {
           } else if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  appBar: AppBar(title: const Text('Budgets')),
-                  body: const Center(child: Text('Budgets coming soon')),
-                ),
-              ),
+              MaterialPageRoute(builder: (context) => const BudgetsScreen()),
             );
           }
         },

@@ -1,5 +1,3 @@
-Here's your README exactly as you have it, ready to copy-paste into VS Code:
-
 ```markdown
 # Expense Tracker
 
