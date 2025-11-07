@@ -394,8 +394,14 @@ class _GoalDetailsSheet extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () {
+                        final goalProvider = context.read<GoalProvider>();
+                        final scaffoldMessenger = ScaffoldMessenger.of(context);
                         Navigator.pop(context);
-                        _showDeleteConfirmation(context);
+                        _showDeleteConfirmation(
+                          context,
+                          goalProvider,
+                          scaffoldMessenger,
+                        );
                       },
                       icon: const Icon(Icons.delete_outline),
                       label: const Text('Delete Goal'),
@@ -413,7 +419,11 @@ class _GoalDetailsSheet extends StatelessWidget {
     );
   }
 
-  void _showDeleteConfirmation(BuildContext context) {
+  void _showDeleteConfirmation(
+    BuildContext context,
+    GoalProvider goalProvider,
+    ScaffoldMessengerState scaffoldMessenger,
+  ) {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
@@ -426,11 +436,11 @@ class _GoalDetailsSheet extends StatelessWidget {
           ),
           FilledButton(
             onPressed: () {
-              context.read<GoalProvider>().deleteGoal(goal.id);
               Navigator.pop(dialogContext);
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text('Goal deleted')));
+              goalProvider.deleteGoal(goal.id);
+              scaffoldMessenger.showSnackBar(
+                const SnackBar(content: Text('Goal deleted')),
+              );
             },
             style: FilledButton.styleFrom(
               backgroundColor: SketchTheme.expenseRed,
