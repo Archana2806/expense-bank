@@ -87,16 +87,25 @@ class SettingsScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Food 🍔'),
-                        const Text('Travel ✈️'),
-                        const Text('Bills 📄'),
-                        const Text('Entertainment 🎬'),
-                        const Text('Shopping 🛍️'),
-                        const Text('Healthcare 💊'),
-                        const Text('Education 📚'),
-                        const Text('Salary 💰'),
-                        const Text('Investment 📈'),
-                        const Text('Other 📦'),
+                        _CategoryRow(icon: Icons.restaurant, text: 'Food'),
+                        _CategoryRow(icon: Icons.flight, text: 'Travel'),
+                        _CategoryRow(icon: Icons.receipt_long, text: 'Bills'),
+                        _CategoryRow(icon: Icons.movie, text: 'Entertainment'),
+                        _CategoryRow(
+                          icon: Icons.shopping_bag,
+                          text: 'Shopping',
+                        ),
+                        _CategoryRow(
+                          icon: Icons.local_hospital,
+                          text: 'Healthcare',
+                        ),
+                        _CategoryRow(icon: Icons.school, text: 'Education'),
+                        _CategoryRow(icon: Icons.attach_money, text: 'Salary'),
+                        _CategoryRow(
+                          icon: Icons.trending_up,
+                          text: 'Investment',
+                        ),
+                        _CategoryRow(icon: Icons.category, text: 'Other'),
                       ],
                     ),
                   ),
@@ -111,6 +120,23 @@ class SettingsScreen extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _CategoryRow extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const _CategoryRow({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [Icon(icon, size: 20), const SizedBox(width: 8), Text(text)],
       ),
     );
   }

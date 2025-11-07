@@ -6,6 +6,7 @@ import 'providers/theme_provider.dart';
 import 'providers/goal_provider.dart';
 import 'services/storage_service.dart';
 import 'screens/dashboard_screen.dart';
+import 'theme/sketch_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,11 +38,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Expense Tracker',
             debugShowCheckedModeBanner: false,
-            theme: themeProvider.lightTheme,
-            darkTheme: themeProvider.darkTheme,
-            themeMode: themeProvider.isDarkMode
-                ? ThemeMode.dark
-                : ThemeMode.light,
+            theme: SketchTheme.lightTheme,
+            darkTheme: SketchTheme.lightTheme,
+            themeMode: ThemeMode.light,
             home: const DashboardScreen(),
           );
         },

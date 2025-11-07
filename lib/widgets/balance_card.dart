@@ -9,7 +9,6 @@ class BalanceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TransactionProvider>(
       builder: (context, provider, child) {
-        final balance = provider.getCurrentBalance();
         final income = provider.getTotalIncome();
         final expenses = provider.getTotalExpenses();
 
@@ -39,7 +38,7 @@ class BalanceCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '\$${balance.toStringAsFixed(2)}',
+                  '₹ ${provider.getCurrentBalance().toStringAsFixed(2)}',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -112,7 +111,7 @@ class _BalanceItem extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '\$${amount.toStringAsFixed(2)}',
+            '₹ ${amount.toStringAsFixed(2)}',
             style: const TextStyle(
               color: Colors.white,
               fontSize: 16,

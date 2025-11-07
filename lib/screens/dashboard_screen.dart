@@ -17,10 +17,10 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expense Tracker'),
+        title: Text('Expense Tracker'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.settings_outlined),
             onPressed: () {
               Navigator.push(
                 context,
@@ -41,30 +41,24 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Balance Card
               const BalanceCard(),
               const SizedBox(height: 24),
 
-              // Expense Chart
               Text(
                 'Expenses by Category',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 12),
               const ExpenseChart(),
               const SizedBox(height: 24),
 
-              // Recent Transactions
+              // Recent Transactions header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Recent Transactions',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   TextButton(
                     onPressed: () {
@@ -75,12 +69,13 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text('See All'),
+                    child: Text('See All'),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
               const RecentTransactionsList(),
+              SizedBox(height: 80), // Space for FAB
             ],
           ),
         ),
@@ -102,15 +97,18 @@ class DashboardScreen extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
+            icon: Icon(Icons.dashboard_outlined),
+            activeIcon: Icon(Icons.dashboard),
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.receipt_long_outlined),
+            activeIcon: Icon(Icons.receipt_long),
             label: 'Transactions',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet),
+            icon: Icon(Icons.account_balance_wallet_outlined),
+            activeIcon: Icon(Icons.account_balance_wallet),
             label: 'Budgets',
           ),
         ],

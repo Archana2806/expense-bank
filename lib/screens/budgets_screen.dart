@@ -171,10 +171,7 @@ class _BudgetsScreenState extends State<BudgetsScreen>
                             children: [
                               Row(
                                 children: [
-                                  Text(
-                                    budget.category.icon,
-                                    style: const TextStyle(fontSize: 32),
-                                  ),
+                                  Icon(budget.category.icon, size: 32),
                                   const SizedBox(width: 12),
                                   Column(
                                     crossAxisAlignment:
@@ -374,10 +371,7 @@ class _BudgetsScreenState extends State<BudgetsScreen>
                     value: category,
                     child: Row(
                       children: [
-                        Text(
-                          category.icon,
-                          style: const TextStyle(fontSize: 20),
-                        ),
+                        Icon(category.icon, size: 20),
                         const SizedBox(width: 12),
                         Text(category.displayName),
                       ],

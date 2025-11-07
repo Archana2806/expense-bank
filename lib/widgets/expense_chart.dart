@@ -68,14 +68,14 @@ class _ExpenseChartState extends State<ExpenseChart> {
           (sum, amount) => sum + amount,
         );
 
-        // Calculate selected amount
-        double displayAmount = total;
+        // Calculate selected label and amount
         String displayLabel = 'Total Spent';
+        double displayAmount = total;
 
         if (_selectedCategory != null &&
             expensesByCategory.containsKey(_selectedCategory)) {
-          displayAmount = expensesByCategory[_selectedCategory]!;
           displayLabel = _selectedCategory!.displayName;
+          displayAmount = expensesByCategory[_selectedCategory] ?? 0;
         }
 
         return Container(
@@ -144,7 +144,7 @@ class _ExpenseChartState extends State<ExpenseChart> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      '\$${displayAmount.toStringAsFixed(0)}',
+                      '₹ ${displayAmount.toStringAsFixed(0)}',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w700,

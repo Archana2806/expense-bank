@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 part 'transaction_model.g.dart';
@@ -116,18 +117,18 @@ extension TransactionCategoryExtension on TransactionCategory {
     };
   }
 
-  String get icon {
+  IconData get icon {
     return switch (this) {
-      TransactionCategory.food => '🍔',
-      TransactionCategory.travel => '✈️',
-      TransactionCategory.bills => '📄',
-      TransactionCategory.entertainment => '🎬',
-      TransactionCategory.shopping => '🛍️',
-      TransactionCategory.healthcare => '💊',
-      TransactionCategory.education => '📚',
-      TransactionCategory.salary => '💰',
-      TransactionCategory.investment => '📈',
-      TransactionCategory.other => '📦',
+      TransactionCategory.food => Icons.restaurant,
+      TransactionCategory.travel => Icons.flight,
+      TransactionCategory.bills => Icons.receipt_long,
+      TransactionCategory.entertainment => Icons.movie,
+      TransactionCategory.shopping => Icons.shopping_bag,
+      TransactionCategory.healthcare => Icons.local_hospital,
+      TransactionCategory.education => Icons.school,
+      TransactionCategory.salary => Icons.attach_money,
+      TransactionCategory.investment => Icons.trending_up,
+      TransactionCategory.other => Icons.category,
     };
   }
 }

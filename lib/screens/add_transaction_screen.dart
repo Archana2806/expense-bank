@@ -188,7 +188,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                   labelText: 'Amount',
                   hintText: '0.00',
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.attach_money),
+                  prefixIcon: Icon(Icons.money),
                 ),
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
@@ -215,17 +215,14 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 decoration: const InputDecoration(
                   labelText: 'Category',
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.category),
+                  prefixIcon: Icon(Icons.travel_explore),
                 ),
                 items: TransactionCategory.values.map((category) {
                   return DropdownMenuItem(
                     value: category,
                     child: Row(
                       children: [
-                        Text(
-                          category.icon,
-                          style: const TextStyle(fontSize: 20),
-                        ),
+                        Icon(category.icon, size: 20),
                         const SizedBox(width: 12),
                         Text(category.displayName),
                       ],

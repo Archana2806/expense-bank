@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/goal_model.dart';
 import '../providers/goal_provider.dart';
+import '../theme/sketch_theme.dart';
 import 'package:uuid/uuid.dart';
 
 class GoalsScreen extends StatelessWidget {
@@ -70,7 +71,9 @@ class _GoalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isOnTrack = goal.isOnTrack;
-    final statusColor = isOnTrack ? Colors.green : Colors.red;
+    final statusColor = isOnTrack
+        ? SketchTheme.incomeGreen
+        : SketchTheme.expenseRed;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -397,7 +400,7 @@ class _GoalDetailsSheet extends StatelessWidget {
                       icon: const Icon(Icons.delete_outline),
                       label: const Text('Delete Goal'),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.red,
+                        foregroundColor: SketchTheme.expenseRed,
                       ),
                     ),
                   ),
@@ -429,7 +432,9 @@ class _GoalDetailsSheet extends StatelessWidget {
                 context,
               ).showSnackBar(const SnackBar(content: Text('Goal deleted')));
             },
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            style: FilledButton.styleFrom(
+              backgroundColor: SketchTheme.expenseRed,
+            ),
             child: const Text('Delete'),
           ),
         ],

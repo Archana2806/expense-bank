@@ -47,10 +47,7 @@ class RecentTransactionsList extends StatelessWidget {
                   backgroundColor: transaction.type == TransactionType.income
                       ? Colors.green.shade100
                       : Colors.red.shade100,
-                  child: Text(
-                    transaction.category.icon,
-                    style: const TextStyle(fontSize: 20),
-                  ),
+                  child: Icon(transaction.category.icon, size: 20),
                 ),
                 title: Text(
                   transaction.title,
